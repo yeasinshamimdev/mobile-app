@@ -60,8 +60,8 @@ export default function SignUpScreen() {
   return (
     <View className="h-full w-full bg-white">
       {!pendingVerification && (
-        <View className="flex-1 justify-center items-center bg-gray-100">
-          <View className="w-4/5 bg-white p-4 rounded-lg shadow-md">
+        <View className="flex-1 justify-center items-center ">
+          <View className="w-full bg-white p-4 rounded-lg shadow-md">
             <Text
               className="text-2xl font-bold mb-4 text-center"
               style={{

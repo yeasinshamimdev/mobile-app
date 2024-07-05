@@ -42,6 +42,12 @@
         "projectId": "4451d228-1c9a-49cf-bd09-2f98c2d4061b"
       }
     },
-    "owner": "yeasin_shamim"
+    "owner": "yeasin_shamim",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4451d228-1c9a-49cf-bd09-2f98c2d4061b"
+    }
   }
 }
