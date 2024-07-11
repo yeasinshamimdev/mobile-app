@@ -30,7 +30,7 @@ const InitialLayout = () => {
 
     if (isSignedIn && inAuthGroup) {
       router.replace("/(private)/home");
-    } else if (!isSignedIn && !inAuthGroup) {
+    } else if (!isSignedIn && !inAuthGroup && isLoaded) {
       router.replace("/(auth)/sign-in");
     }
   }, [isSignedIn, isLoaded, segments]);

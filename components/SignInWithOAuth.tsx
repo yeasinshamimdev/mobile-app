@@ -1,12 +1,17 @@
-import { useOAuth } from "@clerk/clerk-expo";
-import * as WebBrowser from "expo-web-browser";
-import React, { useEffect, useState } from "react";
-
 import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/defaultStyle";
+import { useAuth, useOAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as WebBrowser from "expo-web-browser";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -19,6 +24,7 @@ enum Strategy {
 
 const SignInWithOAuth = () => {
   useWarmUpBrowser();
+  const { isLoaded } = useAuth();
 
   const router = useRouter();
   const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
@@ -45,6 +51,9 @@ const SignInWithOAuth = () => {
       if (createdSessionId && isMounted && setActive) {
         setActive({ session: createdSessionId });
         // Ensure navigation occurs after the component is mounted
+        if (!isLoaded) {
+          return <ActivityIndicator color={"#6941C6"} size={"large"} />;
+        }
         router.replace("/(private)/home");
       }
     } catch (err) {
@@ -73,13 +82,13 @@ const SignInWithOAuth = () => {
       </View> */}
 
       <View style={{ gap: 20, marginTop: 100 }}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.btnOutline}
           onPress={() => onSelectAuth(Strategy.Apple)}
         >
           <Ionicons name="logo-apple" size={24} style={defaultStyles.btnIcon} />
           <Text style={styles.btnOutlineText}>Continue with Apple</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style={styles.btnOutline}
