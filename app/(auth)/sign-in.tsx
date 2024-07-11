@@ -1,9 +1,8 @@
 import SignInWithOAuth from "@/components/SignInWithOAuth";
-import { defaultStyles } from "@/constants/defaultStyle";
 import { useSignIn } from "@clerk/clerk-expo";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -25,7 +24,7 @@ export default function Page() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/(tabs)");
+        router.replace("/(private)/home");
       } else {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
@@ -36,7 +35,7 @@ export default function Page() {
 
   return (
     <View className="h-full w-full bg-white">
-      <View className="flex-1 justify-center items-center bg-white">
+      {/* <View className="flex-1 justify-center items-center bg-white">
         <View className="w-full bg-white p-4 rounded-lg shadow-md">
           <Text
             className="text-2xl font-bold mb-4 text-center"
@@ -74,7 +73,7 @@ export default function Page() {
         >
           <Text>Sign Up</Text>
         </Link>
-      </View>
+      </View> */}
       <SignInWithOAuth />
     </View>
   );

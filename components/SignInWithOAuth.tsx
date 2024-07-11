@@ -45,7 +45,7 @@ const SignInWithOAuth = () => {
       if (createdSessionId && isMounted && setActive) {
         setActive({ session: createdSessionId });
         // Ensure navigation occurs after the component is mounted
-        router.replace("/(tabs)");
+        router.replace("/(private)/home");
       }
     } catch (err) {
       console.error("OAuth error", err);
@@ -54,7 +54,7 @@ const SignInWithOAuth = () => {
 
   return (
     <View className="mt-10">
-      <View style={styles.seperatorView}>
+      {/* <View style={styles.seperatorView}>
         <View
           style={{
             flex: 1,
@@ -70,9 +70,9 @@ const SignInWithOAuth = () => {
             borderBottomWidth: StyleSheet.hairlineWidth,
           }}
         />
-      </View>
+      </View> */}
 
-      <View style={{ gap: 20 }}>
+      <View style={{ gap: 20, marginTop: 100 }}>
         <TouchableOpacity
           style={styles.btnOutline}
           onPress={() => onSelectAuth(Strategy.Apple)}

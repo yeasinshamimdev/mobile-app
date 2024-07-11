@@ -1,9 +1,8 @@
 import SignInWithOAuth from "@/components/SignInWithOAuth";
-import { defaultStyles } from "@/constants/defaultStyle";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import * as React from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -46,7 +45,7 @@ export default function SignUpScreen() {
 
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.replace("/(tabs)");
+        router.replace("/(private)/home");
       } else {
         console.error(JSON.stringify(completeSignUp, null, 2));
       }
@@ -59,7 +58,7 @@ export default function SignUpScreen() {
 
   return (
     <View className="h-full w-full bg-white">
-      {!pendingVerification && (
+      {/* {!pendingVerification && (
         <View className="flex-1 justify-center items-center ">
           <View className="w-full bg-white p-4 rounded-lg shadow-md">
             <Text
@@ -136,7 +135,7 @@ export default function SignUpScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-      )}
+      )} */}
       <SignInWithOAuth />
     </View>
   );

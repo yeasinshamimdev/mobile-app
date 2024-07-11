@@ -3,6 +3,7 @@ import { defaultStyles } from "@/constants/defaultStyle";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { Redirect } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
@@ -16,13 +17,17 @@ import {
 } from "react-native";
 
 const ProfilePage = () => {
-  const { signOut, isSignedIn } = useAuth();
+  const { signOut, isSignedIn, isLoaded } = useAuth();
   const buttonRef = useRef(null);
   const { user } = useUser();
   const [firstName, setFirstName] = useState(user?.firstName);
   const [lastName, setLastName] = useState(user?.lastName);
   const [email, setEmail] = useState(user?.emailAddresses[0].emailAddress);
   const [edit, setEdit] = useState(false);
+
+  if (!isSignedIn && isLoaded) {
+    return <Redirect href={"/sign-in"} />;
+  }
 
   // Load user data on mount
   useEffect(() => {

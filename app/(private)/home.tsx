@@ -23,6 +23,9 @@ interface IWallStatus {
 
 const Page = () => {
   const { isSignedIn, isLoaded } = useAuth();
+  if (!isLoaded) {
+    return <ActivityIndicator color={"#6941C6"} size={"large"} />;
+  }
 
   if (!isSignedIn && isLoaded) {
     return <Redirect href={"/sign-up"} />;

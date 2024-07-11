@@ -3,12 +3,17 @@ import { useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 import React from "react";
+import { ActivityIndicator } from "react-native";
 
 const TabLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
 
+  if (!isLoaded) {
+    return <ActivityIndicator color={"#6941C6"} size={"large"} />;
+  }
+
   if (!isSignedIn && isLoaded) {
-    return <Redirect href={"/sign-in"} />;
+    return <Redirect href="/(auth)/sign-in" />;
   }
 
   return (
@@ -21,7 +26,7 @@ const TabLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           tabBarLabel: "Sort Box",
           title: "Everlab OS",
@@ -29,6 +34,7 @@ const TabLayout = () => {
             <Ionicons name="bookmark-outline" size={size} color={color} />
           ),
         }}
+        redirect={!isSignedIn}
       />
       <Tabs.Screen
         name="profile"
@@ -39,6 +45,7 @@ const TabLayout = () => {
             <Ionicons name="person-circle-outline" size={size} color={color} />
           ),
         }}
+        redirect={!isSignedIn}
       />
     </Tabs>
   );
